@@ -1,19 +1,30 @@
-class Player (name)
-  def initialize 
+class Player
+  attr_accessor :name, :lives
+
+  def initialize (name)
+    @name = name
     @lives = 3 
   end
 
   def lose_life
-    @lives--
+    @lives -= 1
   end
 
+  def game_over
+    lives == 0
+  end
+
+
   def question
-    new_question = new.question(num1,num2)
-    new_question.ask_question
-    if new_question.correct_answer
-      print "YES! You are correct"
+    new_question = Question.new
+    new_question.ask_question(@name)
+
+    input = $stdin.gets.chomp.to_i
+
+    if new_question.correct_answer(input)
+      puts "YES! You are correct"
     else 
-      print "Seriously? No!"
+      puts "Seriously? No!"
       lose_life
     end
   end

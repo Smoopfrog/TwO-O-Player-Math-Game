@@ -1,60 +1,44 @@
-class Question
-  def intitialize
-    num1, num2
-  end
-
-  def sum
-    sum = num1 + num2
-  end
-
-  def ask_question
-    print "What does num1 plus num2 equal"
-
-  def correct_answer
-    sum == input
-end
-
 class Game
-  def initialize 
-    @player1 = Player.new
-    @player2 = Player.new
-    @current player = @player1
+  def initialize (name) 
+    @name = name
+    @player1 = Player.new('Player 1')
+    @player2 = Player.new('Player 2')
   end
   
   def start 
-    puts 'hello'
+    puts 'New game started.'
+    turn
   end
   
-  def switch_players 
-
-  end
-
-  def game_over
-    if lives=0
-  end
 
   def show_scores
-    print "P1: P1.lives vs P2: P2.lives"
+    puts "Player1: #{@player1.lives}/3 vs Player2: #{@player2.lives}/3"
   end 
 
   def check_scores
-    if player.game_over
-      winner(other-player)
+    if @player1.game_over
+      winner(@player2)
+    elsif @player2.game_over
+      winner(@player1)
+    end
+  end
 
   def winner(player)
-    print "Player? wins with a score of ?/3"
-    print '--------GAME-OVER--------'
-    end
+    puts "#{player.name} wins with a score of #{player.lives}/3"
+    puts '--------GAME-OVER--------'
+    puts 'Goodbye!'
+    exit(0)
   end 
 
-  def turn 
-    player1.question
+  def turn
+    @player1.question
     check_scores
     show_scores
-    print "----- NEW TURN -----"
-    player2.question
+    puts "----- NEW TURN -----"
+    @player2.question
     check_scores
     show_scores
-    print "----- NEW TURN -----"
+    puts "----- NEW TURN -----"
     turn
+  end
 end
